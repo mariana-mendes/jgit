@@ -4,31 +4,24 @@ import java.io.File;
 import java.io.IOException;
 
 import org.eclipse.jgit.api.Git;
-import org.eclipse.jgit.attributes.AttributesNodeProvider;
-import org.eclipse.jgit.lib.ObjectDatabase;
 import org.eclipse.jgit.lib.ObjectId;
-import org.eclipse.jgit.lib.RefDatabase;
-import org.eclipse.jgit.lib.ReflogReader;
 import org.eclipse.jgit.lib.Repository;
-import org.eclipse.jgit.lib.RepositoryBuilder;
-import org.eclipse.jgit.lib.StoredConfig;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 public class Testing {
 	
-	Repository repository = null;
+
 
 	public void criaRepo() {
 		try {
-			 repository = new FileRepositoryBuilder().findGitDir(new File("/home/marianams/projeto_si")).build();
+			Repository  repository = new FileRepositoryBuilder().findGitDir(new File("/home/marianams/projeto_si")).build();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println(repository.getGlobalListenerList());
+
 
 	};
 	
