@@ -39,7 +39,7 @@ public class Testing {
 
 	        revWalk.markStart( revWalk.parseCommit( commitId ) );
 	        for( RevCommit commit : revWalk ) {
-	          System.out.println( commit.getFullMessage() );
+	          System.out.println( "Author: "+commit.getAuthorIdent().getName() + ". Message: " + commit.getFullMessage() );
 	        }
 	    }
 };
