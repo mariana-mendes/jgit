@@ -46,21 +46,45 @@ public class RepositorioExistente {
 	  
 	  
 	  public void gitBlame(Repository repository) throws RevisionSyntaxException, AmbiguousObjectException, IncorrectObjectTypeException, IOException, GitAPIException {
-		  final int teste = 3;
-		  
+
+		  /*
+		   * '~' especifica qual HEAD vc ta acessando 
+		   * por exemplo HEAD é a atual, HEAD~ eh uma anterior e assim por diante
+		   *
+		   *O que importa é o ultimo estado do arquivo e quem fez essas alterações
+		   *que no caso são as alterações 'fixas' e quantas alterações a pessoa fez na classe
+		   *
+		   * ~ ~~problema: Se a ultima alteração do arquivo foi de linhas (posicionamento do codigo)
+		   * 
+		   */  
 		  BlameCommand blame = new BlameCommand(repository);
 		  ObjectId commitID = repository.resolve("HEAD");
 		  blame.setStartCommit(commitID);
 		  blame.setFilePath("src/album/Album.java");
 		  BlameResult blameResult = blame.call();
-		  System.out.println(blameResult);
+		  System.out.println(blameResult.getResultContents().size());
 		  System.out.println(blame.getRepository());
+		  
+		  // numero de linhas do arquivo  
+		  int lines = blameResult.getResultContents().size();
+		  
+		 /*  Aqui da pra pegar a linha do arquivo 
+		  *  System.out.println(blameResult.getResultContents().getString(2)); 
+		  */
 		
-		  for (int i = 0; i < teste; i++) {
+
+		  for (int i = 0; i < lines; i++) {
 			  RevCommit commit = blameResult.getSourceCommit(i);
-			  System.out.println("Line: " + i + ": " + commit.getAuthorIdent().getName());
-		}
-		  
-		  
-	  }
+			  System.out.println("Line: " + i + " - Author:  " + commit.getAuthorIdent().getName() + " ---- code: " + blameResult.getResultContents().getString(i));
+
+		  }
+		 
+	}
+	  
+
+  
+	  
+	  
+	  
+	 
 };
