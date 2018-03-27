@@ -1,4 +1,4 @@
-package org.eclipse.jgit.org.eclipse.jgit;
+package jgit;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +14,6 @@ import org.eclipse.jgit.lib.ObjectId;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.revwalk.RevWalk;
-import org.eclipse.jgit.storage.file.FileRepositoryBuilder;
 
 public class RepositorioExistente {
 	
@@ -33,10 +32,9 @@ public class RepositorioExistente {
 	};
 	
 	  public void revWalk(Repository repository, String branch) throws Exception {
-	        RevWalk revWalk;
+	        RevWalk revWalk   = new RevWalk(repository);
 	        ObjectId commitId;
-	       
-	        revWalk = new RevWalk(repository);
+	     
 	        commitId = repository.resolve(branch);
 	        revWalk.markStart( revWalk.parseCommit( commitId ) );
 	        for( RevCommit commit : revWalk ) {
@@ -72,7 +70,6 @@ public class RepositorioExistente {
 		  *  System.out.println(blameResult.getResultContents().getString(2)); 
 		  */
 		
-
 		  for (int i = 0; i < lines; i++) {
 			  RevCommit commit = blameResult.getSourceCommit(i);
 			  System.out.println("Line: " + i + " - Author:  " + commit.getAuthorIdent().getName() + " ---- code: " + blameResult.getResultContents().getString(i));

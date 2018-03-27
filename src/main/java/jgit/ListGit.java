@@ -1,14 +1,9 @@
-package org.eclipse.jgit.org.eclipse.jgit;
+package jgit;
 
 import org.eclipse.jgit.lib.Repository;
 
-/**
- * Hello world!
- *
- */
-public class ListGit {
-	
 
+public class ListGit {
 	
 	static RepositorioExistente t = new RepositorioExistente();
 	
