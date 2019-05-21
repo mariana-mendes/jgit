@@ -23,12 +23,17 @@ import util.DirExplorer;
 
 public class Analyze {
 	
-	CompilationUnit compilationUnit = JavaParser.parse("class Aluno { }");
+	private MethodAnalysis ma;
 	
-	String dir = "/home/mariana/Documents/jgit-and-javaparser/src/main/java/codeExample";
+	public Analyze() {
+		
+	}
+	
+	CompilationUnit compilationUnit = JavaParser.parse("class Aluno { }");
+
+	String dir = "/home/marianamendes/jgit-and-javaparser/src/main/java/codeExample";
     Path path = FileSystems.getDefault().getPath(dir);
 	
-
     ParserConfiguration pc = new ParserConfiguration();
 	
 	public List<CompilationUnit> analise() throws IOException {
@@ -59,10 +64,16 @@ public class Analyze {
 	            System.out.println(Strings.repeat("=", path.length()));
 	            try {
 	                new VoidVisitorAdapter<Object>() {
-	                    @Override
+	                	private MethodAnalysis ma;
+	                	
+
+						@Override
 	                    public void visit(ClassOrInterfaceDeclaration n, Object arg) {
 	                        super.visit(n, arg);
 	                        System.out.println(" * " + n.getName());
+	                        this.ma = new MethodAnalysis(n.getMethods());
+	                        this.ma.printMethods();
+	                        
 	                    }
 	                }.visit(JavaParser.parse(file), null);
 	                System.out.println(); // empty line
@@ -71,8 +82,5 @@ public class Analyze {
 	            }
 	        }).explore(projectDir);
 	    }
-
-	
 	}
 	
-

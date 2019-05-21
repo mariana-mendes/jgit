@@ -15,21 +15,17 @@ public class Main {
 
 	public static void main(String[] args) throws IOException, ParseException {
 		Analyze a = new Analyze();
-	
-	
 		
 		List<CompilationUnit> compU = a.analise();
-		
 		
 		for (Iterator iterator = compU.iterator(); iterator.hasNext();) {
 			CompilationUnit compilationUnit = (CompilationUnit) iterator.next();
 			//System.out.println(compilationUnit);
-			
 		}
 		
 		a.getContentType();
 		
-	    File projectDir = new File("/home/mariana/Documents/pesquisa-ownership/homemade-dynamite/");
+	    File projectDir = new File("/home/marianamendes/jgit-and-javaparser/src/main/java/codeExample");
 		a.listClasses(projectDir);
 		
 		
